@@ -24,6 +24,7 @@ cv2.createTrackbar("Upper_H", "Color Adjustments", 255, 255, nothing)
 cv2.createTrackbar("Upper_S", "Color Adjustments", 255, 255, nothing)
 cv2.createTrackbar("Upper_V", "Color Adjustments", 255, 255, nothing)
 
+# loop
 
 while True:
     _,frame = cap.read()
@@ -78,8 +79,7 @@ while True:
         cv2.drawContours(crop_image, [cm], -1, (50, 50, 150), 2)
         cv2.drawContours(crop_image, [hull], -1, (0, 255, 0), 2)
         
-        #Step - 8
-        # Find convexity defects
+    
         hull = cv2.convexHull(cm, returnPoints=False)
         defects = cv2.convexityDefects(cm, hull)
         count_defects = 0
@@ -103,8 +103,6 @@ while True:
         
         print("count==",count_defects)
         
-        #Step - 9 
-        # Print number of fingers
         if count_defects == 0:
             
             cv2.putText(frame, " ", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2,(0,0,255),2)
@@ -129,9 +127,9 @@ while True:
            
     except:
         pass
-    #step -10    
+     
     cv2.imshow("Thresh", thresh)
-    #cv2.imshow("mask==",mask)
+   
     cv2.imshow("filter==",filtr)
     cv2.imshow("Result", frame)
 
